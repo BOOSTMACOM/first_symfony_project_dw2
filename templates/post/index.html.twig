@@ -13,7 +13,7 @@
 
     {% for post in posts %}
     <h2>{{ post.title }}</h2>
+    <small>{{ post.category.name }}</small>
     {% endfor %}
-
 </div>
 {% endblock %}
