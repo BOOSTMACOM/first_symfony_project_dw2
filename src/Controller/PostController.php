@@ -44,4 +44,28 @@ class PostController extends AbstractController
             'editPostForm' => $form->createView()
         ]);
     }
+
+    #[Route('/post/edit/{id}', name:"app_post_edit")]
+    public function edit(
+        int $id, 
+        Request $request, 
+        PostRepository $postRepository
+    ) : Response
+    {
+        $post = $postRepository->find($id);
+
+        $form = $this->createForm(EditPostFormType::class, $post);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted())
+        {
+           $postRepository->save($post, true);
+
+           return $this->redirectToRoute('app_post');
+        }
+
+        return $this->render('post/edit.html.twig', [
+            'editPostForm' => $form->createView()
+        ]);
+    }
 }

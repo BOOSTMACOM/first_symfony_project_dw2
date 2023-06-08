@@ -16,6 +16,7 @@
     {% if post.category %}
     <small>{{ post.category.name }}</small>
     {% endif %}
+    <p><a href="{{ path('app_post_edit', {'id': post.id }) }}">Modifier</a></p>
     {% endfor %}
 </div>
 {% endblock %}
